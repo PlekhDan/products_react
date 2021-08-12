@@ -16,8 +16,8 @@ class Main extends Component {
         return(
             <Switch>
                 <div className={s.outer}>
-                    <Route exact path='/' render={() => <Products data={data} />}/>
-                    <Route path='/create' component={CreateProduct}/>
+                    <Route exact path='/' render={() => <Products data={data} />} />
+                    <Route path='/create' render={() => <CreateProduct data={data} />} />
                 </div>
             </Switch>
         );
