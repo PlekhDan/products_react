@@ -1,24 +1,37 @@
 import React, { Component } from 'react'
-import {Button, Confirm, Icon} from 'semantic-ui-react'
+import { Confirm, Icon } from 'semantic-ui-react'
 import s from './ConfirmComponent.module.css'
 
 class ConfirmComponent extends Component {
-    state = { open: false }
 
-    open = () => this.setState({ open: true })
-    close = () => this.setState({ open: false })
+    state = {
+        open: false,
+        removeRow: false
+    }
+
+    show = () => this.setState({ open: true })
+
+    handleCancel = () => {
+        this.setState({ open: false })
+    }
+
+    handleConfirm = () => {
+        const id = this.props.index;
+        this.setState({ open: false, removeRow: this.props.removeRow(id) })
+    }
 
     render() {
         return (
             <div>
-                {/*<Button onClick={this.open}><Icon name='times'/></Button>*/}
-                <Icon onClick={this.open} name='trash alternate'/>
+                <Icon onClick={this.show} name='trash alternate'/>
                 <Confirm
                     open={this.state.open}
-                    onCancel={this.close}
-                    onConfirm={this.close}
-                    // className={s.wrap}
-                    size='small'
+                    onCancel={this.handleCancel}
+                    onConfirm={this.handleConfirm}
+                    size='mini'
+                    header='Удалить товар?'
+                    cancelButton='no'
+                    confirmButton='yes'
                 />
             </div>
         )

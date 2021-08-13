@@ -1,12 +1,12 @@
 {
   "products": [
-    {"id": "0", "name": "name0", "code": "0000", "groupId": "01", "price": "120", "count": "5"},
-    {"id": "1", "name": "name1", "code": "0001", "groupId": "02", "price": "356", "count": "7"},
-    {"id": "2", "name": "name2", "code": "0010", "groupId": "02", "price": "45", "count": "51"},
-    {"id": "3", "name": "name3", "code": "0011", "groupId": "01", "price": "230", "count": "23"},
-    {"id": "4", "name": "name4", "code": "0100", "groupId": "03", "price": "101", "count": "4"},
-    {"id": "5", "name": "name5", "code": "0101", "groupId": "01", "price": "98", "count": "9"},
-    {"id": "6", "name": "name6", "code": "0110", "groupId": "03", "price": "57", "count": "16"}
+    {"id": "0", "name": "name0", "code": "A0000", "groupId": "01", "price": "120", "count": "5"},
+    {"id": "1", "name": "name1", "code": "A0001", "groupId": "02", "price": "356", "count": "7"},
+    {"id": "2", "name": "name2", "code": "A0010", "groupId": "02", "price": "45", "count": "51"},
+    {"id": "3", "name": "name3", "code": "A0011", "groupId": "01", "price": "230", "count": "23"},
+    {"id": "4", "name": "name4", "code": "A0100", "groupId": "03", "price": "101", "count": "4"},
+    {"id": "5", "name": "name5", "code": "A0101", "groupId": "01", "price": "98", "count": "9"},
+    {"id": "6", "name": "name6", "code": "A0110", "groupId": "03", "price": "57", "count": "16"}
   ],
   "groups": [
     {"groupId": "01", "name": "groupName1"},

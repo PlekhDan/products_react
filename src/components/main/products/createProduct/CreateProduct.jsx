@@ -1,5 +1,6 @@
 import React, {Component} from "react";
-import {Button, Input, Select} from "semantic-ui-react";
+import {Button, Form, Input, Select} from "semantic-ui-react";
+
 // import s from './CreateProduct.module.css'
 
 
@@ -26,28 +27,28 @@ export class CreateProduct extends Component {
     }
 
     render() {
-        const { groups } = this.state;
+        const {groups} = this.state;
         const selects = groups.map(group => ({
             key: group.groupId,
             value: group.name,
             text: group.name,
         }))
-        return(
-            <form name='create' onSubmit={this.handleSubmit}>
-                <div>Идентификатор:</div>
-                <Input name='id' type='number' required placeholder='id'/>
-                <div>Название:</div>
-                <Input name='name' type='text' required placeholder='name'/>
-                <div>Артикул:</div>
-                <Input name='code' type='text' required placeholder='code'/>
-                <div>Группа товара:</div>
-                <Select options={selects}/>
-                <div>Цена:</div>
-                <Input name='price' type='number' required placeholder='price'/>
-                <div>Количество:</div>
-                <Input name='count' type='number' required placeholder='count'/>
-                <div/><Button>Добавить</Button>
-            </form>
+        return (
+            <Form name='create' onSubmit={this.handleSubmit}>
+                <Form.Group widths={2}>
+                    <Form.Input label='Идентификатор:' type='number' required placeholder='id'/>
+                    <Form.Input label='Название товара:' type='text' required placeholder='name'/>
+                </Form.Group>
+                <Form.Group widths={2}>
+                    <Form.Input label='Артикул:' type='text' required placeholder='code'/>
+                    <Form.Select label='Группа товара:' required options={selects}/>
+                </Form.Group>
+                <Form.Group widths={2}>
+                    <Form.Input label='Цена:' type='number' required placeholder='price'/>
+                    <Form.Input label='Количество товара:' type='number' required placeholder='count'/>
+                </Form.Group>
+                <Button type='submit' disabled>Добавить</Button>
+            </Form>
         );
     }
 }
