@@ -17,21 +17,25 @@ class ConfirmComponent extends Component {
 
     handleConfirm = () => {
         const id = this.props.index;
-        this.setState({ open: false, removeRow: this.props.removeRow(id) })
+        this.setState({
+            open: false,
+            removeProduct: this.props.removeProduct(id)
+        })
     }
 
     render() {
         return (
             <div>
-                <Icon onClick={this.show} name='trash alternate'/>
+                <Icon onClick={this.show} className={s.icon} name='trash alternate'/>
                 <Confirm
                     open={this.state.open}
                     onCancel={this.handleCancel}
                     onConfirm={this.handleConfirm}
                     size='mini'
-                    header='Удалить товар?'
-                    cancelButton='no'
-                    confirmButton='yes'
+                    header='Удалить товар'
+                    content='Вы уверены?'
+                    cancelButton='нет'
+                    confirmButton='удалить'
                 />
             </div>
         )

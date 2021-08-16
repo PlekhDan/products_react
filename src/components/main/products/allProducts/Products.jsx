@@ -12,9 +12,24 @@ export class Products extends Component {
         products: this.props.data.products,
     }
 
-    removeRow = (id) => {
+    createProduct = (createProduct) => {
+        // this.setState({
+        //     products: [...this.state.products, {
+        //         id: "11",
+        //         name: "name11",
+        //         code: "A0110",
+        //         groupId: "01",
+        //         price: "111",
+        //         count: "11"
+        //     }]
+        // })
+        this.setState({
+            products: [...this.state.products, createProduct]
+        })
+    }
+
+    removeProduct = (id) => {
         const {products} = this.state;
-        console.log(id);
         this.setState({
             products: products.filter(product => product['id'] !== id)
         })
@@ -46,14 +61,14 @@ export class Products extends Component {
                                 <Table.Cell>{product.price} руб.</Table.Cell>
                                 <Table.Cell>{product.count * product.price} руб.</Table.Cell>
                                 <Table.Cell>
-                                    <ConfirmComponent removeRow={this.removeRow} index={product.id}/>
+                                    <ConfirmComponent removeProduct={this.removeProduct} index={product.id}/>
                                 </Table.Cell>
                             </Table.Row>
                         ))}
                     </Table.Body>
                 </Table>
                 <Link to='/create'>
-                    <Button>Добавить</Button>
+                    <Button onClick={() => this.createProduct}>Добавить</Button>
                 </Link>
             </div>
         );
