@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { Confirm, Icon } from 'semantic-ui-react'
-import s from './ConfirmComponent.module.css'
 
 class ConfirmComponent extends Component {
 
@@ -26,7 +25,7 @@ class ConfirmComponent extends Component {
     render() {
         return (
             <div>
-                <Icon onClick={this.show} className={s.icon} name='trash alternate'/>
+                <Icon onClick={this.show} name='trash alternate'/>
                 <Confirm
                     open={this.state.open}
                     onCancel={this.handleCancel}

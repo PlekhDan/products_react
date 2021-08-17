@@ -1,8 +1,8 @@
 import React, {Component} from "react";
 import {Route, Switch} from "react-router-dom";
-import {Products} from "./products/allProducts/Products";
-import {CreateProduct} from "./products/createProduct/CreateProduct";
-import s from './Main.module.css'
+import {ProductList} from "./ProductList";
+import {NewProduct} from "./NewProduct";
+import {Container} from "semantic-ui-react";
 
 
 class Main extends Component {
@@ -35,10 +35,10 @@ class Main extends Component {
         const { data } = this.state;
         return(
             <Switch>
-                <div className={s.outer}>
-                    <Route exact path='/' render={() => <Products data={data} />} />
-                    <Route path='/create' render={() => <CreateProduct data={data} createProduct={this.createProduct} />} />
-                </div>
+                <Container>
+                    <Route exact path='/' render={() => <ProductList data={data} />} />
+                    <Route path='/create' render={() => <NewProduct data={data} createProduct={this.createProduct} />} />
+                </Container>
             </Switch>
         );
     }

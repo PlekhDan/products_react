@@ -1,6 +1,6 @@
 import {Component} from "react";
 import {BrowserRouter} from "react-router-dom";
-import Header from "./components/header/Header";
+import PageHeader from "./components/header/PageHeader";
 import Main from "./components/main/Main";
 import Data from './Data.json';
 import './App.css';
@@ -17,7 +17,7 @@ class App extends Component{
         return (
             <BrowserRouter>
                 <div className='app-wrapper'>
-                    <Header/>
+                    <PageHeader/>
                     <Main data={data} />
                 </div>
             </BrowserRouter>

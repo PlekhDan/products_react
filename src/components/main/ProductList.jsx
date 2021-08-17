@@ -1,10 +1,10 @@
 import React, {Component} from "react";
 import {Button, Table} from "semantic-ui-react";
 import {Link} from "react-router-dom";
-import ConfirmComponent from "../confirm/ConfirmComponent";
+import ConfirmComponent from "./ConfirmComponent";
 
 
-export class Products extends Component {
+export class ProductList extends Component {
 
 
     state = {
@@ -54,7 +54,7 @@ export class Products extends Component {
                     <Table.Body>
                         {products.map(product => (
                             <Table.Row key={product.id} index={product.id}>
-                                <Table.Cell>{product.code}</Table.Cell>
+                                <Table.Cell>{product.article}</Table.Cell>
                                 <Table.Cell>{product.name}</Table.Cell>
                                 <Table.Cell>{groups.filter(group => group.groupId === product.groupId)[0]['name']}</Table.Cell>
                                 <Table.Cell>{product.count} шт.</Table.Cell>
@@ -68,7 +68,6 @@ export class Products extends Component {
                     </Table.Body>
                 </Table>
                 <Link to='/create'>
-                    {/*<Button onClick={() => this.createProduct}>Добавить</Button>*/}
                     <Button>Добавить</Button>
                 </Link>
             </div>

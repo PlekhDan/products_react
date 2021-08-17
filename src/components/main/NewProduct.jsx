@@ -4,7 +4,7 @@ import {Button, Form, Input, Message, Select} from "semantic-ui-react";
 
 const MyMessage = (errors) => errors.errors.map(error => <Message error content={error} key={error} />);
 
-export class CreateProduct extends Component {
+export class NewProduct extends Component {
 
     state = {
         groups: this.props.data.groups,
@@ -100,9 +100,9 @@ export class CreateProduct extends Component {
                     <Form.Field onChange={this.handleChange}
                                 control={Input}
                                 required={true}
-                                name='code'
+                                name='article'
                                 label='Артикул:'
-                                placeholder='code'
+                                placeholder='article'
                                 type='text'
                                 error={false}
                     />
