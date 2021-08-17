@@ -12,7 +12,7 @@ export class Products extends Component {
         products: this.props.data.products,
     }
 
-    createProduct = (createProduct) => {
+    // createProduct = (createProduct) => {
         // this.setState({
         //     products: [...this.state.products, {
         //         id: "11",
@@ -23,10 +23,10 @@ export class Products extends Component {
         //         count: "11"
         //     }]
         // })
-        this.setState({
-            products: [...this.state.products, createProduct]
-        })
-    }
+        // this.setState({
+        //     products: [...this.state.products, createProduct]
+        // })
+    // }
 
     removeProduct = (id) => {
         const {products} = this.state;
@@ -68,7 +68,8 @@ export class Products extends Component {
                     </Table.Body>
                 </Table>
                 <Link to='/create'>
-                    <Button onClick={() => this.createProduct}>Добавить</Button>
+                    {/*<Button onClick={() => this.createProduct}>Добавить</Button>*/}
+                    <Button>Добавить</Button>
                 </Link>
             </div>
         );

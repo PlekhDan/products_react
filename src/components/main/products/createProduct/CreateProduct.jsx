@@ -9,18 +9,16 @@ export class CreateProduct extends Component {
     state = {
         groups: this.props.data.groups,
         products: this.props.data.products,
-        createProduct: {},
+        newProduct: {},
         warningId: false,
         warningGroup: false,
         viewErrors: false,
         errors: []
     }
 
-
     handleSubmit = (event) => {
-        const { products } = this.state;
+        const { products, newProduct } = this.state;
         event.preventDefault();
-        const newProduct = this.state.createProduct;
         console.log(newProduct);
 
         const prod = products.reduce((acc, count) => [...acc, count.id], []).some(el => el === newProduct.id);
@@ -55,8 +53,9 @@ export class CreateProduct extends Component {
 
 
     handleChange = (event, {name, value}) => {
+        const { newProduct } = this.state;
         this.setState({
-            createProduct: {...this.state.createProduct, [name]: value},
+            newProduct: {...newProduct, [name]: value},
             warningId: false,
             warningGroup: false,
             viewErrors: false,
