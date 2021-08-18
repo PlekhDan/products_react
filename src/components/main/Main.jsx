@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import {Route, Switch} from "react-router-dom";
-import {ProductList} from "./ProductList";
-import {NewProduct} from "./NewProduct";
+import {ProductList} from "./product-list/ProductList";
+import {NewProduct} from "./new-product/NewProduct";
 import {Container} from "semantic-ui-react";
 
 

@@ -144,6 +144,7 @@ export class NewProduct extends Component {
                     control={Button}
                     content='Добавить'
                     type='submit'
+                    color='blue'
                 />
 
             </Form>

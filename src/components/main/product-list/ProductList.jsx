@@ -1,32 +1,55 @@
 import React, {Component} from "react";
-import {Button, Table} from "semantic-ui-react";
+import {Button, Confirm, Icon, Table} from "semantic-ui-react";
 import {Link} from "react-router-dom";
-import ConfirmComponent from "./ConfirmComponent";
+
+
+export class ConfirmComponent extends Component {
+
+    state = {
+        open: false,
+        removeRow: false
+    }
+
+    show = () => this.setState({ open: true })
+
+    handleCancel = () => {
+        this.setState({ open: false })
+    }
+
+    handleConfirm = () => {
+        const id = this.props.index;
+        this.setState({
+            open: false,
+            removeProduct: this.props.removeProduct(id)
+        })
+    }
+
+    render() {
+        return (
+            <div>
+                <Icon onClick={this.show} name='trash alternate'/>
+                <Confirm
+                    open={this.state.open}
+                    onCancel={this.handleCancel}
+                    onConfirm={this.handleConfirm}
+                    size='mini'
+                    header='Удалить товар'
+                    content='Вы уверены?'
+                    cancelButton='нет'
+                    confirmButton='удалить'
+                />
+            </div>
+        )
+    }
+}
 
 
 export class ProductList extends Component {
-
 
     state = {
         groups: this.props.data.groups,
         products: this.props.data.products,
     }
-
-    // createProduct = (createProduct) => {
-        // this.setState({
-        //     products: [...this.state.products, {
-        //         id: "11",
-        //         name: "name11",
-        //         code: "A0110",
-        //         groupId: "01",
-        //         price: "111",
-        //         count: "11"
-        //     }]
-        // })
-        // this.setState({
-        //     products: [...this.state.products, createProduct]
-        // })
-    // }
 
     removeProduct = (id) => {
         const {products} = this.state;
@@ -68,7 +91,7 @@ export class ProductList extends Component {
                     </Table.Body>
                 </Table>
                 <Link to='/create'>
-                    <Button>Добавить</Button>
+                    <Button color='blue'>Добавить</Button>
                 </Link>
             </div>
         );
