@@ -3,63 +3,29 @@ import {Button, Confirm, Icon, Table} from "semantic-ui-react";
 import {Link} from "react-router-dom";
 
 
-export class ConfirmComponent extends Component {
-
-    state = {
-        open: false,
-        removeProduct: false
-    }
-
-    show = () => this.setState({ open: true })
-
-    handleCancel = () => {
-        this.setState({ open: false })
-    }
-
-    handleConfirm = () => {
-        const id = this.props.id;
-        this.setState({
-            open: false,
-            removeProduct: this.props.removeProduct(id)
-        })
-    }
-
-    render() {
-        return (
-            <div>
-                <Icon onClick={this.show} name='trash alternate'/>
-                <Confirm
-                    open={this.state.open}
-                    onCancel={this.handleCancel}
-                    onConfirm={this.handleConfirm}
-                    size='mini'
-                    header='Удалить товар'
-                    content='Вы уверены?'
-                    cancelButton='нет'
-                    confirmButton='удалить'
-                />
-            </div>
-        )
-    }
-}
-
-
 export class ProductList extends Component {
 
     state = {
         groups: this.props.data.groups,
         products: this.props.data.products,
+        open: false,
+        productId: ''
     }
 
-    removeProduct = (id) => {
-        const {products} = this.state;
+    showConfirm = (id) => this.setState({ open: true, productId: id })
+
+    handleCancel = () => this.setState({ open: false })
+
+    handleConfirm = () => {
+        const { products, productId } = this.state;
         this.setState({
-            products: products.filter(product => product['id'] !== id)
+            open: false,
+            products: products.filter(product => product['id'] !== productId)
         })
     }
 
     render() {
-        const {groups, products} = this.state;
+        const {groups, products, open} = this.state;
         return (
             <div>
                 <Table>
@@ -83,8 +49,18 @@ export class ProductList extends Component {
                                 <Table.Cell>{product.count} шт.</Table.Cell>
                                 <Table.Cell>{product.price} руб.</Table.Cell>
                                 <Table.Cell>{product.count * product.price} руб.</Table.Cell>
-                                <Table.Cell>
-                                    <ConfirmComponent removeProduct={this.removeProduct} id={product.id}/>
+                                <Table.Cell textAlign='center'>
+                                    <Icon onClick={() => this.showConfirm(product.id)} name='trash alternate'/>
+                                    <Confirm
+                                        open={open}
+                                        onCancel={this.handleCancel}
+                                        onConfirm={this.handleConfirm}
+                                        header='Удалить товар'
+                                        content='Вы уверены?'
+                                        cancelButton='нет'
+                                        confirmButton='удалить'
+                                        size='mini'
+                                    />
                                 </Table.Cell>
                             </Table.Row>
                         ))}
