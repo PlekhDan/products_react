@@ -7,7 +7,7 @@ export class ConfirmComponent extends Component {
 
     state = {
         open: false,
-        removeRow: false
+        removeProduct: false
     }
 
     show = () => this.setState({ open: true })
@@ -17,7 +17,7 @@ export class ConfirmComponent extends Component {
     }
 
     handleConfirm = () => {
-        const id = this.props.index;
+        const id = this.props.id;
         this.setState({
             open: false,
             removeProduct: this.props.removeProduct(id)
@@ -84,7 +84,7 @@ export class ProductList extends Component {
                                 <Table.Cell>{product.price} руб.</Table.Cell>
                                 <Table.Cell>{product.count * product.price} руб.</Table.Cell>
                                 <Table.Cell>
-                                    <ConfirmComponent removeProduct={this.removeProduct} index={product.id}/>
+                                    <ConfirmComponent removeProduct={this.removeProduct} id={product.id}/>
                                 </Table.Cell>
                             </Table.Row>
                         ))}
