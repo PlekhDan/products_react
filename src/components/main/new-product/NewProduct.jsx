@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import {Button, Form, Input, Message, Select} from "semantic-ui-react";
+import {Redirect} from "react-router-dom";
 
 
 const MyMessage = (errors) => errors.errors.map(error => <Message error content={error} key={error} />);
@@ -15,7 +16,8 @@ export class NewProduct extends Component {
         warningId: false,
         warningGroup: false,
         viewErrors: false,
-        errors: []
+        errors: [],
+        redirect: false
     }
 
     handleSubmit = (event) => {
@@ -52,6 +54,7 @@ export class NewProduct extends Component {
             delete newProduct.group
             const savedNewProduct = this.savedProducts.concat(newProduct)
             localStorage.setItem('products', JSON.stringify(savedNewProduct))
+            this.setState({ redirect: true })
         }
 
     }
@@ -69,12 +72,16 @@ export class NewProduct extends Component {
     }
 
     render() {
-        const {groups, viewErrors, errors, warningGroup, warningId} = this.state;
+        const {groups, viewErrors, errors, warningGroup, warningId, redirect} = this.state;
         const selects = groups.map(group => ({
             key: group.groupId,
             value: group.name,
             text: group.name,
         }))
+
+        if (redirect) {
+            return <Redirect to="/" />
+        }
         return (
             <Form error={true} onSubmit={this.handleSubmit}>
                 <Form.Group widths={2}>
@@ -147,7 +154,6 @@ export class NewProduct extends Component {
                     type='submit'
                     color='blue'
                 />
-
             </Form>
         );
     }

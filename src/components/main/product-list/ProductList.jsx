@@ -81,7 +81,7 @@ export class ProductList extends Component {
                         ))}
                     </Table.Body>
                 </Table>
-                <Link to='/create' onClick={this.handleClick}>
+                <Link to='/create'>
                     <Button color='blue'>Добавить</Button>
                 </Link>
             </div>

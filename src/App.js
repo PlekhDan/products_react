@@ -1,9 +1,11 @@
-import {Component} from "react";
-import {BrowserRouter} from "react-router-dom";
+import React, {Component} from "react";
+import {BrowserRouter, Route, Switch} from "react-router-dom";
 import PageHeader from "./components/header/PageHeader";
-import Main from "./components/main/Main";
 import Data from './Data.json';
 import './App.css';
+import {ProductList} from "./components/main/product-list/ProductList";
+import {NewProduct} from "./components/main/new-product/NewProduct";
+import {Container} from "semantic-ui-react";
 
 
 class App extends Component{
@@ -16,10 +18,13 @@ class App extends Component{
         const { data } = this.state;
         return (
             <BrowserRouter>
-                <div className='app-wrapper'>
-                    <PageHeader/>
-                    <Main data={data} />
-                </div>
+                <PageHeader/>
+                <Container>
+                    <Switch>
+                    <Route exact path='/' render={() => <ProductList data={data} />}/>
+                    <Route path='/create' render={() => <NewProduct data={data} createProduct={this.createProduct} />}/>
+                    </Switch>
+                </Container>
             </BrowserRouter>
 
         );
