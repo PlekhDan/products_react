@@ -12,16 +12,31 @@ export class ProductList extends Component {
         productId: ''
     }
 
+    savedProducts = JSON.parse(localStorage.getItem('products'))
+
     showConfirm = (id) => this.setState({ open: true, productId: id })
 
     handleCancel = () => this.setState({ open: false })
 
     handleConfirm = () => {
         const { products, productId } = this.state;
+        this.savedProducts = products.filter(product => product['id'] !== productId)
+        localStorage.setItem('products', JSON.stringify(this.savedProducts))
         this.setState({
             open: false,
-            products: products.filter(product => product['id'] !== productId)
+            products: this.savedProducts
         })
+    }
+
+    componentDidMount() {
+        const { products } = this.state;
+        if (this.savedProducts) {
+            this.setState({ products: this.savedProducts })
+        } else {
+            localStorage.setItem('products', JSON.stringify(products))
+            const startProducts = JSON.parse(localStorage.getItem('products'))
+            this.setState({ products: startProducts })
+        }
     }
 
     render() {
@@ -45,7 +60,7 @@ export class ProductList extends Component {
                             <Table.Row key={product.id} index={product.id}>
                                 <Table.Cell>{product.article}</Table.Cell>
                                 <Table.Cell>{product.name}</Table.Cell>
-                                <Table.Cell>{groups.filter(group => group.groupId === product.groupId)[0]['name']}</Table.Cell>
+                                <Table.Cell>{groups.find(group => group.groupId === product.groupId).name}</Table.Cell>
                                 <Table.Cell>{product.count} шт.</Table.Cell>
                                 <Table.Cell>{product.price} руб.</Table.Cell>
                                 <Table.Cell>{product.count * product.price} руб.</Table.Cell>
@@ -66,7 +81,7 @@ export class ProductList extends Component {
                         ))}
                     </Table.Body>
                 </Table>
-                <Link to='/create'>
+                <Link to='/create' onClick={this.handleClick}>
                     <Button color='blue'>Добавить</Button>
                 </Link>
             </div>

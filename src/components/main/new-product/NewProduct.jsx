@@ -6,9 +6,11 @@ const MyMessage = (errors) => errors.errors.map(error => <Message error content=
 
 export class NewProduct extends Component {
 
+    savedProducts = JSON.parse(localStorage.getItem('products'))
+
     state = {
         groups: this.props.data.groups,
-        products: this.props.data.products,
+        products: this.savedProducts,
         newProduct: {},
         warningId: false,
         warningGroup: false,
@@ -17,9 +19,8 @@ export class NewProduct extends Component {
     }
 
     handleSubmit = (event) => {
-        const { products, newProduct } = this.state;
+        const { groups, products, newProduct } = this.state;
         event.preventDefault();
-        console.log(newProduct);
 
         const prod = products.reduce((acc, count) => [...acc, count.id], []).some(el => el === newProduct.id);
 
@@ -46,7 +47,11 @@ export class NewProduct extends Component {
                 errors: [errorGroup]
             })
         } else {
-            console.log('отправляем и перенаправляем на другую страницу');
+            const elem = groups.find(el => el.name === newProduct.group)
+            newProduct.groupId = elem.groupId
+            delete newProduct.group
+            const savedNewProduct = this.savedProducts.concat(newProduct)
+            localStorage.setItem('products', JSON.stringify(savedNewProduct))
         }
 
     }
@@ -61,10 +66,6 @@ export class NewProduct extends Component {
             viewErrors: false,
             errors: []
         })
-    }
-
-    componentDidMount() {
-
     }
 
     render() {
