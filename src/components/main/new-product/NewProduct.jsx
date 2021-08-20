@@ -3,7 +3,7 @@ import {Button, Form, Input, Message, Select} from "semantic-ui-react";
 import {Redirect} from "react-router-dom";
 
 
-const MyMessage = (errors) => errors.errors.map(error => <Message error content={error} key={error} />);
+const ErrorMessage = (errors) => errors.errors.map((error, index) => <Message error content={error} key={index} />);
 
 export class NewProduct extends Component {
 
@@ -147,7 +147,7 @@ export class NewProduct extends Component {
                     />
 
                 </Form.Group>
-                <Form.Field>{viewErrors && <MyMessage errors={errors}/>}</Form.Field>
+                <Form.Field>{viewErrors && <ErrorMessage errors={errors}/>}</Form.Field>
                 <Form.Field
                     control={Button}
                     content='Добавить'
