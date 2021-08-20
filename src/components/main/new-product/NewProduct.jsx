@@ -1,6 +1,6 @@
 import React, {Component} from "react";
-import {Button, Form, Input, Message, Select} from "semantic-ui-react";
 import {Redirect} from "react-router-dom";
+import {Button, Form, Input, Message, Select} from "semantic-ui-react";
 
 
 const ErrorMessage = (errors) => errors.errors.map((error, index) => <Message error content={error} key={index} />);
@@ -13,8 +13,8 @@ export class NewProduct extends Component {
         groups: this.props.data.groups,
         products: this.savedProducts,
         newProduct: {},
-        warningId: false,
-        warningGroup: false,
+        errorId: false,
+        errorGroup: false,
         viewErrors: false,
         errors: [],
         redirect: false
@@ -31,20 +31,20 @@ export class NewProduct extends Component {
 
         if (prod && !('group' in newProduct)) {
             this.setState({
-                warningId: true,
-                warningGroup: true,
+                errorId: true,
+                errorGroup: true,
                 viewErrors: true,
                 errors: [errorId, errorGroup]
             })
         } else if (prod) {
             this.setState({
-                warningId: true,
+                errorId: true,
                 viewErrors: true,
                 errors: [errorId]
             })
         } else if (!('group' in newProduct)) {
             this.setState({
-                warningGroup: true,
+                errorGroup: true,
                 viewErrors: true,
                 errors: [errorGroup]
             })
@@ -64,15 +64,15 @@ export class NewProduct extends Component {
         const { newProduct } = this.state;
         this.setState({
             newProduct: {...newProduct, [name]: value},
-            warningId: false,
-            warningGroup: false,
+            errorId: false,
+            errorGroup: false,
             viewErrors: false,
             errors: []
         })
     }
 
     render() {
-        const {groups, viewErrors, errors, warningGroup, warningId, redirect} = this.state;
+        const {groups, viewErrors, errors, errorGroup, errorId, redirect} = this.state;
         const selects = groups.map(group => ({
             key: group.groupId,
             value: group.name,
@@ -93,7 +93,7 @@ export class NewProduct extends Component {
                                 placeholder='id'
                                 type='number'
                                 min='0.00'
-                                error={warningId}
+                                error={errorId}
                     />
                     <Form.Field onChange={this.handleChange}
                                 control={Input}
@@ -121,7 +121,7 @@ export class NewProduct extends Component {
                                 name='group'
                                 label='Группа товара:'
                                 placeholder='group'
-                                error={warningGroup}
+                                error={errorGroup}
                     />
                 </Form.Group>
                 <Form.Group widths={2}>

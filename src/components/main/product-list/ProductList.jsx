@@ -1,6 +1,6 @@
 import React, {Component} from "react";
-import {Button, Confirm, Icon, Table} from "semantic-ui-react";
 import {Link} from "react-router-dom";
+import {Button, Confirm, Icon, Table} from "semantic-ui-react";
 
 
 export class ProductList extends Component {

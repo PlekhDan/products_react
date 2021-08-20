@@ -1,11 +1,11 @@
 import React, {Component} from "react";
+import './App.css';
+import Data from './Data.json';
 import {BrowserRouter, Route, Switch} from "react-router-dom";
 import PageHeader from "./components/header/PageHeader";
-import Data from './Data.json';
-import './App.css';
+import {Container} from "semantic-ui-react";
 import {ProductList} from "./components/main/product-list/ProductList";
 import {NewProduct} from "./components/main/new-product/NewProduct";
-import {Container} from "semantic-ui-react";
 
 
 class App extends Component{
