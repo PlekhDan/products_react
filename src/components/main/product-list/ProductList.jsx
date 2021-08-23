@@ -3,7 +3,7 @@ import {Link} from "react-router-dom";
 import {Button, Confirm, Icon, Table} from "semantic-ui-react";
 
 
-export class ProductList extends Component {
+class ProductList extends Component {
 
     state = {
         groups: this.props.data.groups,
@@ -88,3 +88,4 @@ export class ProductList extends Component {
         );
     }
 }
+export default ProductList;

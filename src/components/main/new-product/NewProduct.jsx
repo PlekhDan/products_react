@@ -1,5 +1,4 @@
 import React, {Component} from "react";
-import {Redirect} from "react-router-dom";
 import {Button, Form, Input, Message, Select} from "semantic-ui-react";
 
 
@@ -17,7 +16,6 @@ export class NewProduct extends Component {
         errorGroup: false,
         viewErrors: false,
         errors: [],
-        redirect: false
     }
 
     handleSubmit = (event) => {
@@ -55,6 +53,7 @@ export class NewProduct extends Component {
             const savedNewProduct = this.savedProducts.concat(newProduct)
             localStorage.setItem('products', JSON.stringify(savedNewProduct))
             this.setState({ redirect: true })
+            this.props.history.goBack();
         }
 
     }
@@ -72,16 +71,13 @@ export class NewProduct extends Component {
     }
 
     render() {
-        const {groups, viewErrors, errors, errorGroup, errorId, redirect} = this.state;
+        const {groups, viewErrors, errors, errorGroup, errorId} = this.state;
         const selects = groups.map(group => ({
             key: group.groupId,
             value: group.name,
             text: group.name,
         }))
 
-        if (redirect) {
-            return <Redirect to="/" />
-        }
         return (
             <Form error={true} onSubmit={this.handleSubmit}>
                 <Form.Group widths={2}>
